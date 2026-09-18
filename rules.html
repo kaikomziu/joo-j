@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>規約・組織概要 | JOO-J</title>
+<meta name="description" content="Anomalous Observation Organization - Japan Branch の投稿ルールと組織概要。">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="joo-header">
+  <div class="org-en">ANOMALOUS OBSERVATION ORGANIZATION</div>
+  <h1>異常観測機構 日本支部</h1>
+  <div class="org-sub">Japan Branch Archive &mdash; JOO-J Designation Records</div>
+</header>
+<div id="joo-announcement"></div>
+<nav id="joo-nav"></nav>
+
+<main class="joo-main">
+  <div class="joo-panel">
+    <h3>組織概要</h3>
+    <div class="body" id="joo-about" style="white-space:pre-wrap;">読み込み中...</div>
+  </div>
+
+  <div class="joo-panel">
+    <h3>投稿ルール</h3>
+    <div class="body" id="joo-rules" style="white-space:pre-wrap;">読み込み中...</div>
+  </div>
+</main>
+
+<footer class="joo-footer">
+  JOO-J Archive &mdash; 本サイトはフィクションの創作物であり、実在の組織・事件とは関係ありません。
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-config.js"></script>
+<script src="js/common.js"></script>
+<script>
+(async () => {
+  jooRenderNav('rules.html');
+  jooLoadAnnouncement();
+  const { data } = await jooSupabase.from('joo_site_content').select('key, content').in('key', ['about', 'rules']);
+  const map = {};
+  (data || []).forEach(r => map[r.key] = r.content);
+  document.getElementById('joo-about').textContent = map.about && map.about.trim() ? map.about : '(組織概要は未設定です)';
+  document.getElementById('joo-rules').textContent = map.rules && map.rules.trim() ? map.rules : '(投稿ルールは未設定です)';
+})();
+</script>
+</body>
+</html>

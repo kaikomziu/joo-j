@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>収容記録一覧 | Anomalous Observation Organization - Japan Branch</title>
+<meta name="description" content="JOO-J: 日本支部・異常観測機構の収容記録アーカイブ。誰でも自由に異常個体・現象の観測記録を投稿できるSCP風Wiki。">
+<link rel="canonical" href="https://kaikomziu.github.io/joo-j/">
+<meta property="og:title" content="Anomalous Observation Organization - Japan Branch (JOO-J)">
+<meta property="og:description" content="誰でも投稿できる異常観測記録アーカイブ">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="joo-header">
+  <div class="org-en">ANOMALOUS OBSERVATION ORGANIZATION</div>
+  <h1>異常観測機構 日本支部</h1>
+  <div class="org-sub">Japan Branch Archive &mdash; JOO-J Designation Records</div>
+</header>
+<div id="joo-announcement"></div>
+<nav id="joo-nav"></nav>
+
+<main class="joo-main">
+  <div class="joo-toolbar">
+    <input type="text" id="joo-search" placeholder="タイトル・タグで検索...">
+    <select id="joo-filter-class">
+      <option value="">全クラス</option>
+      <option value="safe">安全 - Safe</option>
+      <option value="euclid">ユークリッド - Euclid</option>
+      <option value="keter">ケテル - Keter</option>
+      <option value="thaumiel">サウマテル - Thaumiel</option>
+      <option value="neutralized">無力化 - Neutralized</option>
+      <option value="unclassified">未分類 - Unclassified</option>
+    </select>
+    <a href="edit.html" class="joo-btn primary">+ 新規収容記録を作成</a>
+  </div>
+
+  <div id="joo-loading" class="joo-empty-msg">読み込み中...</div>
+  <div class="joo-grid" id="joo-grid" style="display:none;"></div>
+
+  <div class="joo-special-list" id="joo-special-wrap" style="display:none;">
+    <h3>特殊収容番号(自由形式の記録)</h3>
+    <div id="joo-special-list"></div>
+  </div>
+</main>
+
+<footer class="joo-footer">
+  JOO-J Archive &mdash; 本サイトはフィクションの創作物であり、実在の組織・事件とは関係ありません。<br>
+  投稿内容はすべて閲覧者による自由創作です。
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-config.js"></script>
+<script src="js/common.js"></script>
+<script src="js/index.js"></script>
+</body>
+</html>

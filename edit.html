@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>収容記録の作成・編集 | JOO-J</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="joo-header">
+  <div class="org-en">ANOMALOUS OBSERVATION ORGANIZATION</div>
+  <h1>異常観測機構 日本支部</h1>
+  <div class="org-sub">Japan Branch Archive &mdash; JOO-J Designation Records</div>
+</header>
+<div id="joo-announcement"></div>
+<nav id="joo-nav"></nav>
+
+<main class="joo-main">
+  <h2 id="joo-form-title">新規収容記録の作成</h2>
+
+  <div class="joo-form">
+    <div id="joo-number-block">
+      <label>収容番号 (数字。空欄の場合は自動で次の番号が割り当てられます)</label>
+      <div class="row2">
+        <input type="number" id="joo-f-number" min="1" placeholder="例: 12">
+        <input type="text" id="joo-f-custom-id" placeholder="または自由形式の番号 (例: JOO-J-004-EX)">
+      </div>
+      <div class="hint">通常は「収容番号」に数字を入れると JOO-J-XXX の形式になります。特殊な事案は自由形式欄に直接指定できます。</div>
+    </div>
+    <div id="joo-id-display" class="hint" style="margin-top:10px;"></div>
+
+    <label>タイトル</label>
+    <input type="text" id="joo-f-title" placeholder="収容記録のタイトル">
+
+    <label>オブジェクトクラス</label>
+    <select id="joo-f-class">
+      <option value="safe">安全 - Safe</option>
+      <option value="euclid" selected>ユークリッド - Euclid</option>
+      <option value="keter">ケテル - Keter</option>
+      <option value="thaumiel">サウマテル - Thaumiel</option>
+      <option value="neutralized">無力化 - Neutralized</option>
+      <option value="unclassified">未分類 - Unclassified</option>
+    </select>
+
+    <label>特別収容プロトコル</label>
+    <textarea id="joo-f-containment" placeholder="収容・観測に必要な手順を記載してください"></textarea>
+
+    <label>説明</label>
+    <textarea id="joo-f-description" placeholder="対象の外見、性質、能力などを記載してください"></textarea>
+
+    <label>タグ (カンマ区切り)</label>
+    <input type="text" id="joo-f-tags" placeholder="例: 人型, 認識災害, 液体">
+
+    <label>記録者名(観測員コードネーム等)</label>
+    <input type="text" id="joo-f-author" placeholder="観測員">
+
+    <div style="margin-top:20px; display:flex; gap:10px;">
+      <button class="joo-btn primary" id="joo-save-btn">保存する</button>
+      <a class="joo-btn" href="index.html">キャンセル</a>
+    </div>
+  </div>
+</main>
+
+<footer class="joo-footer">
+  JOO-J Archive &mdash; 本サイトはフィクションの創作物であり、実在の組織・事件とは関係ありません。
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-config.js"></script>
+<script src="js/common.js"></script>
+<script src="js/edit.js"></script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>管理者パネル | JOO-J</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="joo-header">
+  <div class="org-en">ANOMALOUS OBSERVATION ORGANIZATION</div>
+  <h1>異常観測機構 日本支部</h1>
+  <div class="org-sub">Japan Branch Archive &mdash; JOO-J Designation Records</div>
+</header>
+<div id="joo-announcement"></div>
+<nav id="joo-nav"></nav>
+
+<main class="joo-main">
+  <div id="joo-login-panel" class="joo-panel">
+    <h3>管理者ログイン</h3>
+    <div class="joo-form">
+      <label>パスワード</label>
+      <input type="password" id="joo-admin-pw" placeholder="パスワードを入力">
+      <div style="margin-top:12px;">
+        <button class="joo-btn primary" id="joo-admin-login-btn">ログイン</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="joo-admin-body" style="display:none;">
+    <div class="joo-panel">
+      <h3>お知らせバナー(全ページ上部に表示)</h3>
+      <div class="joo-form">
+        <textarea id="joo-admin-announcement" placeholder="空欄で非表示"></textarea>
+        <div style="margin-top:10px;"><button class="joo-btn primary" id="joo-save-announcement">保存</button></div>
+      </div>
+    </div>
+
+    <div class="joo-panel">
+      <h3>組織概要</h3>
+      <div class="joo-form">
+        <textarea id="joo-admin-about"></textarea>
+        <div style="margin-top:10px;"><button class="joo-btn primary" id="joo-save-about">保存</button></div>
+      </div>
+    </div>
+
+    <div class="joo-panel">
+      <h3>投稿ルール</h3>
+      <div class="joo-form">
+        <textarea id="joo-admin-rules"></textarea>
+        <div style="margin-top:10px;"><button class="joo-btn primary" id="joo-save-rules">保存</button></div>
+      </div>
+    </div>
+
+    <div class="joo-panel">
+      <h3>収容記録の管理</h3>
+      <table class="joo-admin-table">
+        <thead><tr><th>番号</th><th>タイトル</th><th>クラス</th><th>評価</th><th></th></tr></thead>
+        <tbody id="joo-admin-articles"></tbody>
+      </table>
+    </div>
+  </div>
+</main>
+
+<footer class="joo-footer">
+  JOO-J Archive &mdash; 本サイトはフィクションの創作物であり、実在の組織・事件とは関係ありません。
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-config.js"></script>
+<script src="js/common.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>

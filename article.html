@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>収容記録 | JOO-J</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="joo-header">
+  <div class="org-en">ANOMALOUS OBSERVATION ORGANIZATION</div>
+  <h1>異常観測機構 日本支部</h1>
+  <div class="org-sub">Japan Branch Archive &mdash; JOO-J Designation Records</div>
+</header>
+<div id="joo-announcement"></div>
+<nav id="joo-nav"></nav>
+
+<main class="joo-main">
+  <div id="joo-loading" class="joo-empty-msg">読み込み中...</div>
+  <div id="joo-article" style="display:none;">
+    <div class="joo-doc-header">
+      <div class="designation" id="joo-a-designation"></div>
+      <h2 id="joo-a-title"></h2>
+      <div class="joo-meta-row">
+        <span class="joo-badge" id="joo-a-class"></span>
+        <span id="joo-a-tags"></span>
+        <span id="joo-a-author"></span>
+        <span id="joo-a-date"></span>
+      </div>
+    </div>
+
+    <div class="joo-vote-row">
+      <button class="joo-btn" id="joo-vote-up">▲ 有用</button>
+      <span class="score" id="joo-a-score">0</span>
+      <button class="joo-btn" id="joo-vote-down">▼ 有用でない</button>
+    </div>
+
+    <div class="joo-section">
+      <div class="label">特別収容プロトコル</div>
+      <div class="body" id="joo-a-containment"></div>
+    </div>
+
+    <div class="joo-section">
+      <div class="label">説明</div>
+      <div class="body" id="joo-a-description"></div>
+    </div>
+
+    <div class="joo-section" id="joo-addenda-wrap" style="display:none;">
+      <div class="label">追記</div>
+      <div id="joo-addenda-list"></div>
+    </div>
+
+    <div class="joo-panel" id="joo-add-addendum-panel">
+      <h3>追記を投稿</h3>
+      <div class="joo-form">
+        <label>投稿者名(観測員コードネーム等)</label>
+        <input type="text" id="joo-addendum-author" placeholder="観測員">
+        <label>追記内容</label>
+        <textarea id="joo-addendum-text" placeholder="追加の観測結果、インシデント報告など..."></textarea>
+        <div style="margin-top:10px;">
+          <button class="joo-btn primary" id="joo-addendum-submit">追記を追加</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="joo-actions">
+      <a class="joo-btn" id="joo-edit-link" href="#">この記録を編集</a>
+      <button class="joo-btn danger" id="joo-delete-btn" style="display:none;">管理者権限で削除</button>
+    </div>
+  </div>
+</main>
+
+<footer class="joo-footer">
+  JOO-J Archive &mdash; 本サイトはフィクションの創作物であり、実在の組織・事件とは関係ありません。
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-config.js"></script>
+<script src="js/common.js"></script>
+<script src="js/article.js"></script>
+</body>
+</html>
