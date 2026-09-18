@@ -46,6 +46,10 @@ function jooRenderArticle(a) {
   const badge = document.getElementById('joo-a-class');
   badge.textContent = info.label;
   badge.style.color = info.color;
+  const dInfo = jooDangerInfo(a.danger_level);
+  const dangerBadge = document.getElementById('joo-a-danger');
+  dangerBadge.textContent = '危険度: ' + dInfo.label;
+  dangerBadge.style.color = dInfo.color;
   document.getElementById('joo-a-tags').textContent = (a.tags && a.tags.length) ? '#' + a.tags.join(' #') : '';
   document.getElementById('joo-a-author').textContent = '記録者: ' + (a.author_name || '不明');
   document.getElementById('joo-a-date').textContent = new Date(a.created_at).toLocaleDateString('ja-JP');

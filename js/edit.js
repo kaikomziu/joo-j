@@ -22,6 +22,7 @@ async function jooInitEdit() {
     }
     document.getElementById('joo-f-title').value = data.title || '';
     document.getElementById('joo-f-class').value = data.object_class || 'unclassified';
+    document.getElementById('joo-f-danger').value = data.danger_level || 'unknown';
     document.getElementById('joo-f-containment').value = data.containment || '';
     document.getElementById('joo-f-description').value = data.description || '';
     document.getElementById('joo-f-tags').value = (data.tags || []).join(', ');
@@ -57,6 +58,7 @@ function jooCollectForm() {
   return {
     title: document.getElementById('joo-f-title').value.trim(),
     object_class: document.getElementById('joo-f-class').value,
+    danger_level: document.getElementById('joo-f-danger').value,
     containment: document.getElementById('joo-f-containment').value.trim(),
     description: document.getElementById('joo-f-description').value.trim(),
     tags,

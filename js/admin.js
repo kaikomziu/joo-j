@@ -53,19 +53,21 @@ async function jooSaveContent(key, content) {
 }
 
 async function jooLoadAdminArticles() {
-  const { data, error } = await jooSupabase.from('joo_articles').select('id, title, object_class, rating_up, rating_down').order('id');
+  const { data, error } = await jooSupabase.from('joo_articles').select('id, title, object_class, danger_level, rating_up, rating_down').order('id');
   const tbody = document.getElementById('joo-admin-articles');
   if (error || !data) {
-    tbody.innerHTML = '<tr><td colspan="5">取得に失敗しました</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="6">取得に失敗しました</td></tr>';
     return;
   }
   tbody.innerHTML = data.map(a => {
     const info = jooClassInfo(a.object_class);
+    const dInfo = jooDangerInfo(a.danger_level);
     const score = (a.rating_up || 0) - (a.rating_down || 0);
     return `<tr>
       <td><a href="article.html?id=${encodeURIComponent(a.id)}">${jooEscapeHtml(a.id)}</a></td>
       <td>${jooEscapeHtml(a.title || '')}</td>
       <td style="color:${info.color}">${info.label}</td>
+      <td style="color:${dInfo.color}">${dInfo.label}</td>
       <td>${score}</td>
       <td><button class="joo-btn danger" data-id="${jooEscapeHtml(a.id)}">削除</button></td>
     </tr>`;

@@ -33,15 +33,29 @@
     <label>タイトル</label>
     <input type="text" id="joo-f-title" placeholder="収容記録のタイトル">
 
-    <label>オブジェクトクラス</label>
-    <select id="joo-f-class">
-      <option value="safe">安全 - Safe</option>
-      <option value="euclid" selected>ユークリッド - Euclid</option>
-      <option value="keter">ケテル - Keter</option>
-      <option value="thaumiel">サウマテル - Thaumiel</option>
-      <option value="neutralized">無力化 - Neutralized</option>
-      <option value="unclassified">未分類 - Unclassified</option>
-    </select>
+    <div class="row2">
+      <div>
+        <label>オブジェクトクラス</label>
+        <select id="joo-f-class">
+          <option value="safe">安全 - Safe</option>
+          <option value="euclid" selected>ユークリッド - Euclid</option>
+          <option value="keter">ケテル - Keter</option>
+          <option value="thaumiel">サウマテル - Thaumiel</option>
+          <option value="neutralized">無力化 - Neutralized</option>
+          <option value="unclassified">未分類 - Unclassified</option>
+        </select>
+      </div>
+      <div>
+        <label>危険度</label>
+        <select id="joo-f-danger">
+          <option value="unknown" selected>不明 - Unknown</option>
+          <option value="low">低 - Low</option>
+          <option value="medium">中 - Medium</option>
+          <option value="high">高 - High</option>
+          <option value="critical">最重要 - Critical</option>
+        </select>
+      </div>
+    </div>
 
     <label>特別収容プロトコル</label>
     <textarea id="joo-f-containment" placeholder="収容・観測に必要な手順を記載してください"></textarea>

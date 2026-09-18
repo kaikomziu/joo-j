@@ -9,6 +9,18 @@ const JOO_CLASSES = {
   unclassified: { label: '未分類 - Unclassified', color: '#9c5fe0' },
 };
 
+const JOO_DANGER_LEVELS = {
+  unknown: { label: '不明 - Unknown', color: '#8a9186' },
+  low: { label: '低 - Low', color: '#4caf50' },
+  medium: { label: '中 - Medium', color: '#e0b32d' },
+  high: { label: '高 - High', color: '#e07a3d' },
+  critical: { label: '最重要 - Critical', color: '#e0453c' },
+};
+
+function jooDangerInfo(key) {
+  return JOO_DANGER_LEVELS[key] || JOO_DANGER_LEVELS.unknown;
+}
+
 const JOO_ADMIN_SESSION_KEY = 'joo_admin_unlocked';
 
 function jooEscapeHtml(str) {
