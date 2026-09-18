@@ -37,8 +37,15 @@ function jooEscapeHtml(str) {
   return div.innerHTML;
 }
 
+function jooFormatText(str) {
+  let html = jooEscapeHtml(str);
+  html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  html = html.replace(/--(.+?)--/g, '<del>$1</del>');
+  return html;
+}
+
 function jooNl2br(str) {
-  return jooEscapeHtml(str).replace(/\n/g, '<br>');
+  return jooFormatText(str).replace(/\n/g, '<br>');
 }
 
 function jooClassInfo(key) {
