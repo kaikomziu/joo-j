@@ -52,6 +52,14 @@ function jooRenderArticle(a) {
   dangerBadge.style.color = dInfo.color;
   document.getElementById('joo-a-tags').textContent = (a.tags && a.tags.length) ? '#' + a.tags.join(' #') : '';
   document.getElementById('joo-a-author').textContent = '記録者: ' + (a.author_name || '不明');
+  const img = document.getElementById('joo-a-image');
+  if (a.image_url) {
+    img.src = a.image_url;
+    img.alt = a.title || '';
+    img.style.display = 'block';
+  } else {
+    img.style.display = 'none';
+  }
   document.getElementById('joo-a-date').textContent = new Date(a.created_at).toLocaleDateString('ja-JP');
   document.getElementById('joo-a-containment').innerHTML = jooNl2br(a.containment || '(未記載)');
   document.getElementById('joo-a-description').innerHTML = jooNl2br(a.description || '(未記載)');

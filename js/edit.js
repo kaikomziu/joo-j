@@ -1,5 +1,44 @@
 let jooEditMode = 'create'; // 'create' | 'edit'
 let jooEditingId = null;
+let jooExistingImageUrl = null;
+let jooImageRemoved = false;
+
+function jooShowImagePreview(url) {
+  const wrap = document.getElementById('joo-f-image-preview-wrap');
+  const img = document.getElementById('joo-f-image-preview');
+  img.src = url;
+  wrap.style.display = 'block';
+}
+
+function jooSetupImageField() {
+  document.getElementById('joo-f-image-file').addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    jooImageRemoved = false;
+    const reader = new FileReader();
+    reader.onload = () => jooShowImagePreview(reader.result);
+    reader.readAsDataURL(file);
+  });
+  document.getElementById('joo-f-image-remove').addEventListener('click', () => {
+    jooImageRemoved = true;
+    document.getElementById('joo-f-image-file').value = '';
+    document.getElementById('joo-f-image-preview-wrap').style.display = 'none';
+  });
+}
+
+async function jooUploadImageIfNeeded(id) {
+  const fileInput = document.getElementById('joo-f-image-file');
+  const file = fileInput.files[0];
+  if (!file) {
+    return jooImageRemoved ? null : undefined; // undefined = leave unchanged
+  }
+  const ext = (file.name.split('.').pop() || 'jpg').toLowerCase();
+  const path = `${id}/${Date.now()}.${ext}`;
+  const { error } = await jooSupabase.storage.from('joo-images').upload(path, file, { upsert: true });
+  if (error) throw error;
+  const { data } = jooSupabase.storage.from('joo-images').getPublicUrl(path);
+  return data.publicUrl;
+}
 
 function jooRenderTagChips(selected) {
   const selectedSet = new Set(selected || []);
@@ -20,6 +59,7 @@ async function jooInitEdit() {
   jooRenderNav('edit.html');
   jooLoadAnnouncement();
   jooRenderTagChips([]);
+  jooSetupImageField();
 
   const idParam = jooQueryParam('id');
   const newParam = jooQueryParam('new');
@@ -43,6 +83,10 @@ async function jooInitEdit() {
     document.getElementById('joo-f-description').value = data.description || '';
     jooRenderTagChips(data.tags || []);
     document.getElementById('joo-f-author').value = data.author_name || '';
+    if (data.image_url) {
+      jooExistingImageUrl = data.image_url;
+      jooShowImagePreview(data.image_url);
+    }
   } else if (newParam) {
     document.getElementById('joo-f-number').value = newParam;
     document.getElementById('joo-id-display').textContent = `割り当て予定: JOO-J-${jooPadNumber(newParam)}`;
@@ -94,8 +138,11 @@ async function jooSave() {
 
   try {
     if (jooEditMode === 'edit') {
+      const imageResult = await jooUploadImageIfNeeded(jooEditingId);
+      const imagePatch = imageResult === undefined ? {} : { image_url: imageResult };
       const { error } = await jooSupabase.from('joo_articles').update({
         ...form,
+        ...imagePatch,
         updated_at: new Date().toISOString(),
       }).eq('id', jooEditingId);
       if (error) throw error;
@@ -139,8 +186,10 @@ async function jooSave() {
       return;
     }
 
+    const imageResult = await jooUploadImageIfNeeded(id);
     const { error } = await jooSupabase.from('joo_articles').insert({
       id, number, ...form,
+      image_url: imageResult === undefined ? null : imageResult,
     });
     if (error) throw error;
 

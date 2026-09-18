@@ -33,6 +33,14 @@
     <label>タイトル</label>
     <input type="text" id="joo-f-title" placeholder="収容記録のタイトル">
 
+    <label>画像(任意)</label>
+    <div id="joo-f-image-preview-wrap" style="display:none; margin-bottom:8px;">
+      <img id="joo-f-image-preview" style="max-width:100%; max-height:260px; border:1px solid var(--border); display:block;">
+      <button type="button" class="joo-btn danger" id="joo-f-image-remove" style="margin-top:6px;">画像を削除</button>
+    </div>
+    <input type="file" id="joo-f-image-file" accept="image/png,image/jpeg,image/gif,image/webp">
+    <div class="hint">PNG/JPEG/GIF/WebP、5MBまで</div>
+
     <div class="row2">
       <div>
         <label>オブジェクトクラス</label>
