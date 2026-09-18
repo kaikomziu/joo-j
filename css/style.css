@@ -307,6 +307,33 @@ a:hover { text-decoration: underline; }
 .joo-form .hint { font-size: 11px; color: var(--text-dim); margin-top: 3px; }
 .joo-form .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 
+.joo-tag-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  border: 1px solid var(--border);
+  background: var(--bg-panel);
+  padding: 10px;
+}
+
+.joo-tag-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border: 1px solid var(--border);
+  padding: 5px 10px;
+  font-size: 12px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.joo-tag-chip input { margin: 0; cursor: pointer; }
+
+.joo-tag-chip.checked {
+  border-color: var(--accent);
+  color: var(--accent-bright);
+}
+
 .joo-panel {
   border: 1px solid var(--border);
   background: var(--bg-panel);

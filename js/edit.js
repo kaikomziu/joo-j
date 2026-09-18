@@ -1,9 +1,25 @@
 let jooEditMode = 'create'; // 'create' | 'edit'
 let jooEditingId = null;
 
+function jooRenderTagChips(selected) {
+  const selectedSet = new Set(selected || []);
+  const wrap = document.getElementById('joo-f-tags');
+  wrap.innerHTML = JOO_TAGS.map(tag => `
+    <label class="joo-tag-chip${selectedSet.has(tag) ? ' checked' : ''}">
+      <input type="checkbox" value="${jooEscapeHtml(tag)}" ${selectedSet.has(tag) ? 'checked' : ''}>${jooEscapeHtml(tag)}
+    </label>
+  `).join('');
+  wrap.querySelectorAll('input[type=checkbox]').forEach(cb => {
+    cb.addEventListener('change', () => {
+      cb.closest('.joo-tag-chip').classList.toggle('checked', cb.checked);
+    });
+  });
+}
+
 async function jooInitEdit() {
   jooRenderNav('edit.html');
   jooLoadAnnouncement();
+  jooRenderTagChips([]);
 
   const idParam = jooQueryParam('id');
   const newParam = jooQueryParam('new');
@@ -25,7 +41,7 @@ async function jooInitEdit() {
     document.getElementById('joo-f-danger').value = data.danger_level || 'unknown';
     document.getElementById('joo-f-containment').value = data.containment || '';
     document.getElementById('joo-f-description').value = data.description || '';
-    document.getElementById('joo-f-tags').value = (data.tags || []).join(', ');
+    jooRenderTagChips(data.tags || []);
     document.getElementById('joo-f-author').value = data.author_name || '';
   } else if (newParam) {
     document.getElementById('joo-f-number').value = newParam;
@@ -54,7 +70,7 @@ function jooUpdateIdPreview() {
 }
 
 function jooCollectForm() {
-  const tags = document.getElementById('joo-f-tags').value.split(',').map(s => s.trim()).filter(Boolean);
+  const tags = Array.from(document.querySelectorAll('#joo-f-tags input[type=checkbox]:checked')).map(cb => cb.value);
   return {
     title: document.getElementById('joo-f-title').value.trim(),
     object_class: document.getElementById('joo-f-class').value,

@@ -21,6 +21,14 @@ function jooDangerInfo(key) {
   return JOO_DANGER_LEVELS[key] || JOO_DANGER_LEVELS.unknown;
 }
 
+const JOO_TAGS = [
+  '人型', '動物', '植物', '無生物', '液体', '気体',
+  '建造物', '乗り物', '電子機器', '食料', '医療関連',
+  '認識災害', '記憶災害', '感染性', '寄生生物', '精神汚染',
+  '変形能力', '自己複製', '時空間', '異次元', '儀式・信仰',
+  '都市伝説', '未確認', '収容困難', '知性体', '超能力',
+];
+
 const JOO_ADMIN_SESSION_KEY = 'joo_admin_unlocked';
 
 function jooEscapeHtml(str) {
