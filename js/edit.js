@@ -55,11 +55,21 @@ function jooRenderTagChips(selected) {
   });
 }
 
+function jooSetupAiField() {
+  document.querySelectorAll('#joo-f-ai input[type=radio]').forEach(rb => {
+    rb.addEventListener('change', () => {
+      document.querySelectorAll('#joo-f-ai .joo-tag-chip').forEach(chip => chip.classList.remove('checked'));
+      if (rb.checked) rb.closest('.joo-tag-chip').classList.add('checked');
+    });
+  });
+}
+
 async function jooInitEdit() {
   jooRenderNav('edit.html');
   jooLoadAnnouncement();
   jooRenderTagChips([]);
   jooSetupImageField();
+  jooSetupAiField();
 
   const idParam = jooQueryParam('id');
   const newParam = jooQueryParam('new');
@@ -86,6 +96,11 @@ async function jooInitEdit() {
     if (data.image_url) {
       jooExistingImageUrl = data.image_url;
       jooShowImagePreview(data.image_url);
+    }
+    const aiRadio = document.querySelector(`#joo-f-ai input[value="${data.ai_disclosure || 'none'}"]`);
+    if (aiRadio) {
+      aiRadio.checked = true;
+      aiRadio.closest('.joo-tag-chip').classList.add('checked');
     }
   } else if (newParam) {
     document.getElementById('joo-f-number').value = newParam;
@@ -132,6 +147,13 @@ async function jooSave() {
     jooToast('タイトルを入力してください', true);
     return;
   }
+
+  const aiChecked = document.querySelector('#joo-f-ai input[type=radio]:checked');
+  if (!aiChecked) {
+    jooToast('「AI生成の利用状況」を選択してください', true);
+    return;
+  }
+  form.ai_disclosure = aiChecked.value;
 
   const btn = document.getElementById('joo-save-btn');
   btn.disabled = true;

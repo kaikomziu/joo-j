@@ -79,6 +79,15 @@
     <label>記録者名(観測員コードネーム等)</label>
     <input type="text" id="joo-f-author" placeholder="観測員">
 
+    <label>AI生成の利用状況(必須)</label>
+    <div class="joo-tag-grid" id="joo-f-ai">
+      <label class="joo-tag-chip"><input type="radio" name="joo-ai" value="none">AI生成なし</label>
+      <label class="joo-tag-chip"><input type="radio" name="joo-ai" value="full">完全AI(文章はすべてAIが生成)</label>
+      <label class="joo-tag-chip"><input type="radio" name="joo-ai" value="partial">一部自分で修正(AIの文章を自分で修正・加筆)</label>
+      <label class="joo-tag-chip"><input type="radio" name="joo-ai" value="image">画像のみAI生成(文章は自分で執筆)</label>
+    </div>
+    <div class="hint">AIにアイデア出しやプロットの相談だけをしてもらい、文章・画像は自分で作った場合は「AI生成なし」を選んでください。この項目は必須です。</div>
+
     <div style="margin-top:20px; display:flex; gap:10px;">
       <button class="joo-btn primary" id="joo-save-btn">保存する</button>
       <a class="joo-btn" href="index.html">キャンセル</a>

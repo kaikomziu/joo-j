@@ -29,6 +29,17 @@ const JOO_TAGS = [
   '都市伝説', '未確認', '収容困難', '知性体', '超能力',
 ];
 
+const JOO_AI_DISCLOSURE = {
+  none: { label: 'AI生成なし', color: '#8a9186' },
+  full: { label: 'AI生成あり(完全AI)', color: '#e0453c' },
+  partial: { label: '一部使用(AI+修正)', color: '#e0b32d' },
+  image: { label: '画像のみAI生成', color: '#3d8fe0' },
+};
+
+function jooAiInfo(key) {
+  return JOO_AI_DISCLOSURE[key] || JOO_AI_DISCLOSURE.none;
+}
+
 const JOO_ADMIN_SESSION_KEY = 'joo_admin_unlocked';
 
 function jooEscapeHtml(str) {

@@ -50,6 +50,10 @@ function jooRenderArticle(a) {
   const dangerBadge = document.getElementById('joo-a-danger');
   dangerBadge.textContent = '危険度: ' + dInfo.label;
   dangerBadge.style.color = dInfo.color;
+  const aiInfo = jooAiInfo(a.ai_disclosure);
+  const aiBadge = document.getElementById('joo-a-ai');
+  aiBadge.textContent = aiInfo.label;
+  aiBadge.style.color = aiInfo.color;
   document.getElementById('joo-a-tags').textContent = (a.tags && a.tags.length) ? '#' + a.tags.join(' #') : '';
   document.getElementById('joo-a-author').textContent = '記録者: ' + (a.author_name || '不明');
   const img = document.getElementById('joo-a-image');
